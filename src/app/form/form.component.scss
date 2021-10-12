@@ -44,21 +44,39 @@ $fontFamily: "Nunito", sans-serif;
     }
 
     button {
+      font: {
+        family: $fontFamily;
+        weight: bold;
+        size: 16px;
+      }
       margin-top: 15px;
+      padding: 8px 20px;
+      border: none;
+      background-color: #176864;
+      color: #fff;
+      border-radius: 5px;
+      width: 100%;
+
+      @media (min-width: 480px) {
+        width: unset;
+      }
     }
     // button {
     //   // background-color: #176864;
-    //   // border: none;
     //   // color: #fff;
-    //   // font-weight: bold;
-    //   // font-size: 16px;
-    //   // margin-top: 15px;
     // }
 
-    // button:hover {
-    //   background-color: #115350;
-    //   cursor: pointer;
-    // }
+    button:hover {
+      // background-color: #115350;
+      cursor: pointer;
+      background-color: #0e4441;
+    }
+
+    button:disabled {
+      // background-color: #115350;
+      cursor: unset;
+      background-color: #59a5a2;
+    }
   }
 
   .error-div {

@@ -51,15 +51,9 @@
         id="password"
         type="password"
         placeholder="Password"
-        (keyup)="checkPasswords(password.value, confirmPassword.value)"
       />
-      <div *ngIf="password.touched" class="error-div">
-        <div *ngIf="!password.valid && password.errors?.required">
-          Password is required.
-        </div>
-        <div *ngIf="!validPasswords && confirmPassword.touched">
-          Passwords should match.
-        </div>
+      <div *ngIf="!password.valid && password.touched" class="error-div">
+        <div *ngIf="password.errors?.required">Password is required.</div>
       </div>
     </div>
     <div>
@@ -72,14 +66,17 @@
         id="confirm-password"
         type="password"
         placeholder="Confirm password"
-        (keyup)="checkPasswords(password.value, confirmPassword.value)"
+        appPasswordValidator="password"
       />
-      <div *ngIf="confirmPassword.touched" class="error-div">
-        <div *ngIf="confirmPassword.errors?.required && !confirmPassword.valid">
+      <div
+        *ngIf="confirmPassword.touched && !confirmPassword.valid"
+        class="error-div"
+      >
+        <div *ngIf="confirmPassword.errors?.required">
           Password confirmation is required.
         </div>
-        <div *ngIf="!validPasswords && password.touched">
-          Passwords should match.
+        <div *ngIf="confirmPassword.errors?.passwordValidator">
+          Passwords have to match.
         </div>
       </div>
     </div>
@@ -93,13 +90,13 @@
         id="date-of-birth"
         type="date"
         placeholder="Date of birth"
-        (change)="checkDate(dateOfBirth.value)"
+        appDateValidator
       />
-      <div *ngIf="dateOfBirth.touched" class="error-div">
-        <div *ngIf="!dateOfBirth.valid && dateOfBirth.errors?.required">
+      <div *ngIf="dateOfBirth.touched && !dateOfBirth.valid" class="error-div">
+        <div *ngIf="dateOfBirth.errors?.required">
           Date of birth is required.
         </div>
-        <div *ngIf="!validDate && dateOfBirth.dirty">
+        <div *ngIf="dateOfBirth.errors?.dateValidator">
           Date should be less than current one.
         </div>
       </div>
@@ -133,13 +130,15 @@
         id="personal-site"
         type="url"
         placeholder="Personal site URL"
-        (keydown)="checkUrl(personalSite.value)"
+        appUrlValidator
       />
       <div
-        *ngIf="personalSite.touched && personalSite.value.length > 0"
+        *ngIf="personalSite.touched && !personalSite.valid"
         class="error-div"
       >
-        <div *ngIf="!validUrl">Personal site should be URL format.</div>
+        <div *ngIf="personalSite.errors?.urlValidator">
+          Personal site should be URL format.
+        </div>
       </div>
     </div>
     <div>
