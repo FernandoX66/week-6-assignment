@@ -1,0 +1,95 @@
+$fontFamily: "Nunito", sans-serif;
+
+.top-space {
+  height: 100px;
+  background-color: #176864;
+}
+
+.form-div {
+  background-color: #fdfdfd;
+  border-radius: 5px;
+  padding: 25px 40px 40px 40px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.274);
+  margin-top: -50px;
+  margin-bottom: 40px;
+
+  form {
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    select,
+    textarea,
+    input {
+      font-family: $fontFamily;
+      padding: 8px 14px;
+      font-size: 16px;
+      color: rgb(70, 70, 70);
+      border: 1px solid rgb(160, 160, 160);
+      border-radius: 5px;
+    }
+
+    select,
+    textarea,
+    input {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+      margin: 15px 0 0 0;
+    }
+
+    textarea {
+      min-height: 60px;
+    }
+
+    button {
+      margin-top: 15px;
+    }
+    // button {
+    //   // background-color: #176864;
+    //   // border: none;
+    //   // color: #fff;
+    //   // font-weight: bold;
+    //   // font-size: 16px;
+    //   // margin-top: 15px;
+    // }
+
+    // button:hover {
+    //   background-color: #115350;
+    //   cursor: pointer;
+    // }
+  }
+
+  .error-div {
+    background-color: rgb(246, 216, 216);
+    margin: 0;
+    padding: 0 15px;
+    border-radius: 3px;
+
+    div {
+      color: rgb(170, 19, 19);
+      margin: 0;
+      padding: 3px 0;
+    }
+  }
+
+  .checkbox,
+  .radio {
+    label {
+      width: 100%;
+      margin: 0;
+    }
+
+    input {
+      width: auto;
+      min-width: 0;
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  .radio:last-of-type {
+    margin-bottom: 15px;
+  }
+}
