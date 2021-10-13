@@ -13,11 +13,15 @@
         placeholder="Name"
         minlength="4"
         maxlength="15"
+        appCapitalValidator
       />
       <div *ngIf="name.touched && !name.valid" class="error-div">
         <div *ngIf="name.errors?.required">Name is required.</div>
         <div *ngIf="name.errors?.minlength">
           Name should be minimum 4 characters.
+        </div>
+        <div *ngIf="name.errors?.capitalValidator">
+          Name should start with a capital letter.
         </div>
       </div>
     </div>
@@ -33,11 +37,15 @@
         placeholder="Last name"
         minlength="4"
         maxlength="15"
+        appCapitalValidator
       />
       <div *ngIf="!lastName.valid && lastName.touched" class="error-div">
         <div *ngIf="lastName.errors?.required">Last name is required.</div>
         <div *ngIf="lastName.errors?.minlength">
           Last name should be minimum 4 characters.
+        </div>
+        <div *ngIf="lastName.errors?.capitalValidator">
+          Last name should start with a capital letter.
         </div>
       </div>
     </div>
@@ -109,8 +117,9 @@
         name="telephone-number"
         #telephoneNumber="ngModel"
         id="telephone-number"
-        type="number"
+        type="text"
         placeholder="Telephone number"
+        appNumericValidator
       />
       <div
         *ngIf="!telephoneNumber.valid && telephoneNumber.touched"
@@ -118,6 +127,9 @@
       >
         <div *ngIf="telephoneNumber.errors?.required">
           Telephone number is required.
+        </div>
+        <div *ngIf="telephoneNumber.errors?.numericValidator">
+          Only numeric characters are allowed.
         </div>
       </div>
     </div>
@@ -169,35 +181,23 @@
     <div ngModelGroup="address">
       <div>
         <label for="country">Select a country:</label>
-        <select required ngModel name="country" #country="ngModel" id="country">
-          <option *ngFor="let country of countries" [value]="country">
-            {{ country }}
+        <select
+          required
+          ngModel
+          name="country"
+          #country="ngModel"
+          id="country"
+          (change)="filterStates(country.value)"
+        >
+          <option *ngFor="let country of countriesList" [value]="country.id">
+            {{ country.name }}
           </option>
         </select>
       </div>
       <div *ngIf="country.dirty">
         <label for="state">Select a state:</label>
-        <select
-          required
-          ngModel
-          name="state"
-          id="state"
-          *ngIf="country.value === 'El Salvador'"
-        >
-          <option *ngFor="let state of elSalvadorStates" [value]="state">
-            {{ state }}
-          </option>
-        </select>
-        <select
-          required
-          ngModel
-          name="state"
-          id="state"
-          *ngIf="country.value === 'Belize'"
-        >
-          <option *ngFor="let state of belizeStates" [value]="state">
-            {{ state }}
-          </option>
+        <select required ngModel name="state" id="state">
+          <option *ngFor="let state of filteredStates">{{ state.name }}</option>
         </select>
       </div>
     </div>
